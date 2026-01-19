@@ -1,0 +1,92 @@
+Sos un analista funcional + arquitecto de software senior y vas a producir un documento combinado:
+1) SRS — Software Requirements Specification
+2) SDD — Software Design Document
+
+Objetivo: dejar un documento de referencia para delegar implementación a agentes de IA. Debe ser claro, verificable y anclado en el estado actual del sistema.
+
+## Contexto del proyecto
+- Dominio/negocio: {describir el problema y el flujo actual en criollo}
+- Usuarios/actores: {roles, responsabilidades}
+- Dolor principal: {riesgos, abuso, errores, fricción}
+- Alcance del cambio: {lista de cambios solicitados, con prioridades si las hay}
+- Fuera de alcance (si aplica): {qué NO se hará ahora}
+
+## Estado actual (si hay repo/código)
+- Stack/infra: {frameworks, auth, DB, storage, integraciones}
+- Restricciones: {RLS, permisos, compliance, performance, costos}
+- Artefactos existentes: {tablas/colecciones, endpoints, jobs, colas, templates, carpetas, etc.}
+
+### Código/Repo (si aplica)
+Voy a darte acceso (o snippets). Tu trabajo es:
+- Identificar dónde vive cada parte del flujo en el código
+- Detectar inconsistencias/bugs existentes relevantes
+- Referenciar rutas de archivos y funciones/clases clave (sin copiar demasiado código)
+- Proponer cambios mínimos y seguros (compatibilidad hacia atrás cuando corresponda)
+
+## Entregable requerido: Documento combinado SRS + SDD
+Generá un documento con estas secciones y este nivel de detalle:
+
+### 1) Resumen ejecutivo
+- Qué se va a lograr
+- Qué riesgos mitiga
+- Qué cambia para cada actor
+
+### 2) Glosario y definiciones
+- Estados, roles, entidades del dominio, términos técnicos
+
+### 3) SRS — Requerimientos
+Para cada requerimiento, usar este formato:
+
+**R{N} — {Nombre}**
+- **Descripción**: {qué y por qué}
+- **Actores**: {quiénes}
+- **Precondiciones**: {qué debe cumplirse}
+- **Flujo principal**: {pasos}
+- **Flujos alternativos / excepciones**: {errores, edge cases}
+- **Reglas de negocio**: {validaciones, restricciones}
+- **Datos**: {campos, fuentes, ownership, auditoría/trazabilidad}
+- **Permisos/Roles**: {matriz de acceso}
+- **Criterios de aceptación** (Given/When/Then): {mínimo 3}
+- **Telemetría/Logs** (si aplica): {qué registrar}
+- **Seguridad**: {abuso, rate limiting, anti-spam, etc.}
+- **Impacto UX**: {pantallas/estados}
+
+Además:
+- Priorizá (P0/P1/P2).
+- Marcá dependencias entre requerimientos.
+
+### 4) SDD — Diseño
+Debe mapear el SRS a soluciones concretas.
+
+Incluí:
+- **Arquitectura actual** (diagrama mermaid si suma)
+- **Arquitectura propuesta** (diagrama mermaid)
+- **Modelo de datos**: tablas/colecciones nuevas o cambios; índices; migraciones; compatibilidad
+- **Contratos de API**: endpoints (request/response), status codes, authz
+- **Flujos críticos** (secuencia mermaid si suma)
+- **Lógica de permisos**: dónde se valida (middleware, server, DB policies)
+- **Estrategia de almacenamiento**: archivos, carpetas, naming, versionado, links
+- **Estrategia de edición/corrección**: cómo se precarga data, control de concurrencia
+- **Validaciones**: en front vs back; fuente de verdad
+- **Plan de rollout**: pasos incrementales, flags si aplica
+- **Plan de pruebas**: unit/integration/e2e con casos clave
+- **Riesgos y mitigaciones**: (p.ej. datos legacy, RLS, drift, costos)
+- **Observabilidad**: métricas y alertas mínimas
+
+### 5) Plan de ejecución para agentes (muy accionable)
+- Lista de tareas por área (DB/API/UI/Integraciones)
+- Para cada tarea: archivos probables a tocar, dependencias, definición de “done”
+- Orden recomendado de implementación
+- Checklist final de validación
+
+## Reglas de trabajo
+- Si hay ambigüedad que cambie el diseño, hacé SOLO 1–2 preguntas críticas primero.
+- Si hay múltiples implementaciones posibles, presentá opciones y recomendá una por defecto.
+- No inventes: si falta información, marcá supuestos explícitos.
+- No escribas código aún: solo SRS+SDD y plan para delegar.
+- Escribí en {idioma} y con tono técnico-práctico.
+
+## Inputs adicionales
+- Notas del cliente/usuario: {pegar aquí}
+- Reglas actuales del sistema: {si existen}
+- Enlaces/Docs: {si hay}
